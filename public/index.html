@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>VLESS Subscription</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #172554,
+            #070b17 55%,
+            #03050b
+        );
+
+    color: #fff;
+
+    min-height: 100vh;
+
+}
+
+.container {
+
+    width: 100%;
+    max-width: 600px;
+
+    margin: auto;
+
+    padding:
+        24px
+        16px
+        50px;
+
+}
+
+.header {
+
+    text-align: center;
+
+    padding: 20px 0 25px;
+
+}
+
+.logo {
+
+    width: 70px;
+    height: 70px;
+
+    margin: auto;
+
+    border-radius: 22px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 15px 45px
+        rgba(37, 99, 235, .35);
+
+}
+
+h1 {
+
+    margin:
+        18px
+        0
+        8px;
+
+    font-size: 25px;
+
+}
+
+.subtitle {
+
+    color: #94a3b8;
+
+    font-size: 14px;
+
+}
+
+.card {
+
+    background:
+        rgba(15, 23, 42, .85);
+
+    border:
+        1px solid
+        rgba(148,163,184,.15);
+
+    border-radius: 24px;
+
+    padding: 20px;
+
+    margin-bottom: 16px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.25);
+
+    backdrop-filter:
+        blur(15px);
+
+}
+
+.card-title {
+
+    font-size: 16px;
+
+    margin-bottom: 15px;
+
+    color: #e2e8f0;
+
+}
+
+select,
+input {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    border:
+        1px solid
+        #334155;
+
+    background:
+        #0f172a;
+
+    color: white;
+
+    outline: none;
+
+    font-size: 14px;
+
+    margin-bottom: 12px;
+
+}
+
+select:focus,
+input:focus {
+
+    border-color: #3b82f6;
+
+}
+
+button {
+
+    width: 100%;
+
+    border: 0;
+
+    border-radius: 15px;
+
+    padding: 15px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    box-shadow:
+        0 10px 30px
+        rgba(37,99,235,.25);
+
+}
+
+button:active {
+
+    transform: scale(.98);
+
+}
+
+button.secondary {
+
+    background:
+        #1e293b;
+
+    box-shadow: none;
+
+    margin-top: 10px;
+
+}
+
+.status {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 13px;
+
+    color: #94a3b8;
+
+}
+
+.dot {
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 12px
+        #22c55e;
+
+}
+
+.result {
+
+    display: none;
+
+}
+
+.sub-url {
+
+    direction: ltr;
+
+    text-align: left;
+
+    word-break: break-all;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    background:
+        #020617;
+
+    border:
+        1px solid
+        #1e293b;
+
+    color: #93c5fd;
+
+    font-size: 12px;
+
+    margin:
+        12px
+        0;
+
+}
+
+.stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 10px;
+
+}
+
+.stat {
+
+    background:
+        #0f172a;
+
+    border-radius: 15px;
+
+    padding: 15px;
+
+    text-align: center;
+
+}
+
+.stat-number {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #60a5fa;
+
+}
+
+.stat-label {
+
+    margin-top: 5px;
+
+    font-size: 12px;
+
+    color: #64748b;
+
+}
+
+.error {
+
+    display: none;
+
+    padding: 14px;
+
+    margin-bottom: 15px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(239,68,68,.12);
+
+    border:
+        1px solid
+        rgba(239,68,68,.3);
+
+    color: #fca5a5;
+
+    font-size: 13px;
+
+}
+
+.success {
+
+    color: #86efac;
+
+}
+
+footer {
+
+    text-align: center;
+
+    color: #475569;
+
+    font-size: 11px;
+
+    margin-top: 25px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="logo">
+            ⚡
+        </div>
+
+        <h1>
+            VLESS Subscription
+        </h1>
+
+        <div class="subtitle">
+            مدیریت اشتراک‌های VLESS
+        </div>
+
+        <div
+            class="status"
+            style="justify-content:center;margin-top:15px"
+        >
+
+            <span class="dot"></span>
+
+            <span id="status">
+                در حال اتصال...
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="error"
+        id="error"
+    ></div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+            👤 انتخاب کاربر
+        </div>
+
+        <select id="clientSelect">
+
+            <option value="">
+                در حال دریافت کاربران...
+            </option>
+
+        </select>
+
+        <button
+            onclick="generateSubscription()"
+        >
+            🔗 ساخت Subscription
+        </button>
+
+    </div>
+
+
+    <div
+        class="card result"
+        id="result"
+    >
+
+        <div class="card-title">
+            ✅ Subscription آماده است
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <div
+                    class="stat-number"
+                    id="linkCount"
+                >
+                    0
+                </div>
+
+                <div class="stat-label">
+                    کانفیگ VLESS
+                </div>
+
+            </div>
+
+            <div class="stat">
+
+                <div
+                    class="stat-number"
+                    id="clientName"
+                >
+                    -
+                </div>
+
+                <div class="stat-label">
+                    کاربر
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="sub-url"
+            id="subUrl"
+        ></div>
+
+
+        <button
+            onclick="copySubscription()"
+        >
+            📋 کپی لینک Subscription
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="openV2RayNG()"
+        >
+            📱 باز کردن Subscription
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+            ➕ ساخت کاربر VLESS
+        </div>
+
+        <input
+            id="newEmail"
+            type="text"
+            placeholder="نام کاربر / ایمیل"
+        >
+
+        <input
+            id="newComment"
+            type="text"
+            placeholder="توضیحات"
+        >
+
+        <input
+            id="newGB"
+            type="number"
+            placeholder="حجم به GB - صفر = نامحدود"
+            value="0"
+        >
+
+        <select id="inboundSelect">
+
+            <option value="">
+                انتخاب VLESS Inbound
+            </option>
+
+        </select>
+
+        <button
+            onclick="createClient()"
+        >
+            ➕ ساخت کاربر
+        </button>
+
+    </div>
+
+
+    <footer>
+        VLESS Subscription Manager
+    </footer>
+
+</div>
+
+
+<script>
+
+let clients = [];
+
+let currentSubscription = "";
+
+
+/* --------------------------------
+   Helpers
+-------------------------------- */
+
+function showError(message) {
+
+    const box =
+        document.getElementById("error");
+
+    box.innerText = message;
+
+    box.style.display = "block";
+
+}
+
+function hideError() {
+
+    document.getElementById(
+        "error"
+    ).style.display = "none";
+
+}
+
+
+/* --------------------------------
+   Load clients
+-------------------------------- */
+
+async function loadClients() {
+
+    try {
+
+        const response =
+            await fetch("/api/clients");
+
+        const data =
+            await response.json();
+
+        if (!data.success) {
+            throw new Error(data.msg);
+        }
+
+        clients = data.obj || [];
+
+        const select =
+            document.getElementById(
+                "clientSelect"
+            );
+
+        select.innerHTML = "";
+
+        const activeClients =
+            clients.filter(
+                client => client.enable
+            );
+
+        if (activeClients.length === 0) {
+
+            select.innerHTML =
+                `<option value="">
+                    کاربر فعالی وجود ندارد
+                </option>`;
+
+            return;
+
+        }
+
+        activeClients.forEach(client => {
+
+            const option =
+                document.createElement("option");
+
+            option.value =
+                client.subId;
+
+            option.textContent =
+                client.email;
+
+            select.appendChild(option);
+
+        });
+
+        document.getElementById(
+            "status"
+        ).innerText =
+            `${activeClients.length} کاربر فعال`;
+
+    } catch (error) {
+
+        showError(
+            "خطا در دریافت کاربران: " +
+            error.message
+        );
+
+        document.getElementById(
+            "status"
+        ).innerText =
+            "اتصال برقرار نشد";
+
+    }
+
+}
+
+
+/* --------------------------------
+   Load VLESS inbounds
+-------------------------------- */
+
+async function loadInbounds() {
+
+    try {
+
+        const response =
+            await fetch("/api/inbounds");
+
+        const data =
+            await response.json();
+
+        if (!data.success) {
+            throw new Error(data.msg);
+        }
+
+        const select =
+            document.getElementById(
+                "inboundSelect"
+            );
+
+        select.innerHTML =
+            `<option value="">
+                انتخاب VLESS Inbound
+            </option>`;
+
+        (data.obj || []).forEach(inbound => {
+
+            const option =
+                document.createElement("option");
+
+            option.value =
+                inbound.id;
+
+            option.textContent =
+                `${inbound.remark} : ${inbound.port}`;
+
+            select.appendChild(option);
+
+        });
+
+    } catch (error) {
+
+        showError(
+            "خطا در دریافت Inboundها: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* --------------------------------
+   Generate subscription
+-------------------------------- */
+
+async function generateSubscription() {
+
+    hideError();
+
+    const subId =
+        document.getElementById(
+            "clientSelect"
+        ).value;
+
+    if (!subId) {
+
+        showError(
+            "ابتدا یک کاربر انتخاب کن."
+        );
+
+        return;
+
+    }
+
+    const client =
+        clients.find(
+            item => item.subId === subId
+        );
+
+    if (!client) {
+
+        showError(
+            "کاربر پیدا نشد."
+        );
+
+        return;
+
+    }
+
+    const subscriptionUrl =
+        `${window.location.origin}/api/sub/${encodeURIComponent(subId)}`;
+
+    currentSubscription =
+        subscriptionUrl;
+
+    document.getElementById(
+        "subUrl"
+    ).innerText =
+        subscriptionUrl;
+
+    document.getElementById(
+        "clientName"
+    ).innerText =
+        client.email;
+
+    document.getElementById(
+        "result"
+    ).style.display =
+        "block";
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/sub/${encodeURIComponent(subId)}/json`
+            );
+
+        const data =
+            await response.json();
+
+        if (data.success) {
+
+            document.getElementById(
+                "linkCount"
+            ).innerText =
+                data.count || 0;
+
+        }
+
+    } catch {
+
+        document.getElementById(
+            "linkCount"
+        ).innerText =
+            "?";
+
+    }
+
+}
+
+
+/* --------------------------------
+   Copy subscription
+-------------------------------- */
+
+async function copySubscription() {
+
+    if (!currentSubscription) {
+        return;
+    }
+
+    await navigator.clipboard.writeText(
+        currentSubscription
+    );
+
+    const button =
+        event.currentTarget;
+
+    const oldText =
+        button.innerText;
+
+    button.innerText =
+        "✅ کپی شد";
+
+    setTimeout(() => {
+
+        button.innerText =
+            oldText;
+
+    }, 1500);
+
+}
+
+
+/* --------------------------------
+   Open v2rayNG
+-------------------------------- */
+
+function openV2RayNG() {
+
+    if (!currentSubscription) {
+        return;
+    }
+
+    /*
+     * Android may hand the URL to a compatible app.
+     */
+
+    window.location.href =
+        currentSubscription;
+
+}
+
+
+/* --------------------------------
+   Create client
+-------------------------------- */
+
+async function createClient() {
+
+    hideError();
+
+    const email =
+        document.getElementById(
+            "newEmail"
+        ).value.trim();
+
+    const comment =
+        document.getElementById(
+            "newComment"
+        ).value.trim();
+
+    const totalGB =
+        Number(
+            document.getElementById(
+                "newGB"
+            ).value || 0
+        );
+
+    const inboundId =
+        document.getElementById(
+            "inboundSelect"
+        ).value;
+
+    if (!email) {
+
+        showError(
+            "نام کاربر را وارد کن."
+        );
+
+        return;
+
+    }
+
+    if (!inboundId) {
+
+        showError(
+            "یک VLESS Inbound انتخاب کن."
+        );
+
+        return;
+
+    }
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/clients",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        email,
+                        comment,
+                        totalGB:
+                            totalGB > 0
+                                ? totalGB *
+                                  1024 *
+                                  1024 *
+                                  1024
+                                : 0,
+                        expiryTime: 0,
+                        inboundIds: [
+                            Number(inboundId)
+                        ]
+                    })
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (!data.success) {
+            throw new Error(data.msg);
+        }
+
+        alert(
+            "کاربر با موفقیت ساخته شد."
+        );
+
+        document.getElementById(
+            "newEmail"
+        ).value = "";
+
+        document.getElementById(
+            "newComment"
+        ).value = "";
+
+        await loadClients();
+
+    } catch (error) {
+
+        showError(
+            "ساخت کاربر ناموفق بود: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* --------------------------------
+   Start
+-------------------------------- */
+
+loadClients();
+
+loadInbounds();
+
+</script>
+
+</body>
+
+          </html>
