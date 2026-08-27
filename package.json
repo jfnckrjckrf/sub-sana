@@ -1,0 +1,16 @@
+{
+  "name": "vless-sub-panel",
+  "version": "1.0.0",
+  "description": "Beautiful VLESS subscription manager for 3x-ui Sanaei",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0"
+  }
+}
